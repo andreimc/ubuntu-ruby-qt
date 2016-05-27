@@ -1,0 +1,25 @@
+XORG=/usr/bin/Xorg
+XORGARGS="-noreset +extension GLX +extension RANDR +extension RENDER  :0"
+PIDFILE=/var/run/xorg.pid
+case "$1" in
+  start)
+    echo -n "Starting X: Xorg"
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --make-pidfile --background --exec $XORG -- $XORGARGS
+    echo "."
+    ;;
+  stop)
+    echo -n "Stopping X: Xorg"
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    echo "."
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  *)
+        echo "Usage: /etc/init.d/xorg {start|stop|restart}"
+        exit 1
+esac
+ 
+exit 0
+
