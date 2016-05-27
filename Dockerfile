@@ -16,15 +16,18 @@ WORKDIR /root
 RUN curl -O http://ftp.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz &&
     tar -xzvf ruby-2.3.1.tar.gz &&
     cd ruby-2.3.1/ &&
-    ./configure && 
-    make && make install
+    ./configure &&
+    make && make install &&
+    rm -rf /root/ruby-2.3.1/
+
 
 RUN curl -O https://dl.dropboxusercontent.com/u/10287287/Packages/qt-5.4.1.deb &&
-    dpkg -i qt-5.4.1.deb
+    dpkg -i qt-5.4.1.deb &&
+    rm /root/qt-5.4.1.deb
+
 
 RUN apt-get purge build-essential -y &&
     apt-get clean && 
-    rm -rf /root/* &&
     rm -rf /tmp/*
 
 ADD config/xorg.conf /etc/X11/xorg.conf
