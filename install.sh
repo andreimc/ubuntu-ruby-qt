@@ -16,9 +16,11 @@ curl -O https://dl.dropboxusercontent.com/u/10287287/Packages/qt-5.4.1.deb
 
 dpkg -i qt-5.4.1.deb
 
-apt-get purge build-essential
+apt-get purge build-essential -y
 
 apt-get clean
 
 rm -rf /root/*
 rm -rf /tm/*
+
+exit 0
